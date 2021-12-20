@@ -2,23 +2,20 @@ Testing Steps
 Environment: Linux
 Inputs
 Start a new network
-	 python3 chord_node_stabilize.py 50001
+	 python3 chord_node_stabilize.py <port_number>
 Add a node via existing buddy node
-	python3 chord_node_stabilize.py 50010 50001
+	python3 chord_node_stabilize.py <port_number> <existing_node_port_number>
 Add two nodes concurrently in Linux
-	(python3 chord_node_stabilize.py 50024 50001) & (python3 chord_node_stabilize.py 50085 50001)
+	(python3 chord_node_stabilize.py <port_number> <existing_node_port_number>) & (python3 chord_node_stabilize.py <port_number> <existing_node_port_number>)
 Note: We can also achieve same using bash script
 
 To populate data
-	python3 chord_populate.py 50010 data.csv
+	python3 chord_populate.py <existing_node_port_number> data.csv
 To query data
-	python3 chord_query.py 50010 tomfarris/2513861 1948
+	python3 chord_query.py <existing_node_port_number> tomfarris/2513861 1948
 
 Note: It takes few iterations for network to get stabilized. Please expect a delay in finger table to populate right data.
 If finger tables are not updating correctly, please run the program again with atleast 10seconds gab between adding new nodes.
-
-After stabilization, in case of concurrent joins predecessor and successors are updating correctly. Finger tables are also updating correctly.
-When tried to populate the data, data will also be populated correctly.
 
 Expected Output: 
 ID:  15
@@ -69,6 +66,3 @@ Start:  63  ID:  47 , , Interval: [ 63 , 79 ] Successor:  90
 Start:  79  ID:  47 , , Interval: [ 79 , 111 ] Successor:  90
 Start:  111  ID:  47 , , Interval: [ 111 , 47 ] Successor:  15
 -------------------------------------------------------
-
-
-
